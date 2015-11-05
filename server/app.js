@@ -54,12 +54,11 @@ app.post('/data', function(req,res){
         //console.log(query);
         //client.query(query);
 
-        //client.query("INSERT INTO people (name, location) VALUES ($1, $2)", [addedPerson.name, addedPerson.location]);
         client.query("INSERT INTO people (name, location) VALUES ($1, $2) RETURNING id", [addedPerson.name, addedPerson.location],
             function(err, result) {
                 if(err) {
                     console.log("Error inserting data: ", err);
-                    res.send(false)
+                    res.send(false);
                 }
 
                 res.send(true);
