@@ -8,6 +8,7 @@ $(document).ready(function(){
       });
 
       getData(values);
+
    });
 
    $("#addSomeone").submit(addSomeone);
@@ -34,6 +35,8 @@ function addSomeone(){
    $.each($(this).serializeArray(), function(i, field){
       values[field.name] = field.value;
    });
+
+   $("#addSomeone").find("input[type = text]").val("");
 
    $.ajax({
       type: "POST",
@@ -63,11 +66,15 @@ function deletePerson(){
 
 function updateDOM(data){
    $("#peopleContainer").empty();
+   $('#addsomeone').empty();
 
    for(var i = 0; i < data.length; i++){
       var el = "<div class='well col-md-3'>" +
                   "<p>" + data[i].name + "</p>" +
                   "<p>" + data[i].location + "</p>" +
+                  "<p>" + data[i].age + "</p>" +
+                  "<p>" + data[i].address + "</p>" +
+                  "<p>" + data[i].spiritname + "</p>" +
                   "<button class='delete btn btn-danger' data-id='" +
                      data[i]._id + "'>Delete</button>" +
                "</div>";
